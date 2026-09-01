@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException, Request
+from fastapi import FastAPI, Depends, HTTPException, Request, Header
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -218,8 +218,12 @@ def list_guarantors(user: User = Depends(current_user), db: Session = Depends(ge
 
 
 @app.post("/bootstrap/superadmin")
-def bootstrap_superadmin(data: RegisterIn, request: Request, db: Session = Depends(get_db)):
-    secret = request.headers.get("x-bootstrap-secret", "")
+def bootstrap_superadmin(
+    data: RegisterIn,
+    x_bootstrap_secret: str = Header(default="", alias="x-bootstrap-secret"),
+    db: Session = Depends(get_db)
+):
+    secret = x_bootstrap_secret
     if not settings.BOOTSTRAP_ADMIN_SECRET or secret != settings.BOOTSTRAP_ADMIN_SECRET:
         raise HTTPException(403, "Bootstrap no autorizado")
     existing_super = db.query(User).filter(User.role == "superadmin").first()
