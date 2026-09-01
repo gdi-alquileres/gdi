@@ -10,7 +10,7 @@ import uuid
 
 from .db import Base, engine, get_db
 from .models import User, Property, Tenant, Lease, Charge, Payment, Receipt, Guarantor
-from .schemas import RegisterIn, LoginIn, PropertyIn, TenantIn, LeaseIn, ChargeIn, ManualPaymentIn, MercadoPagoOrderIn, GuarantorIn
+from .schemas import RegisterIn, LoginIn, PropertyIn, TenantIn, LeaseIn, ChargeIn, ManualPaymentIn, MercadoPagoOrderIn, GuarantorIn, EmailUpdateIn
 from .auth import hash_password, verify_password, make_token, current_user, require_admin
 from .config import settings
 
@@ -241,3 +241,30 @@ def bootstrap_superadmin(
         db.add(user)
     db.commit(); db.refresh(user)
     return {"ok":True,"id":user.id,"email":user.email,"role":user.role}
+
+@app.patch("/me/email")
+def update_my_email(
+    data: EmailUpdateIn,
+    user: User = Depends(current_user),
+    db: Session = Depends(get_db)
+):
+    new_email = data.email.lower()
+
+    existing = db.query(User).filter(
+        User.email == new_email,
+        User.id != user.id
+    ).first()
+
+    if existing:
+        raise HTTPException(400, "Ese email ya está registrado")
+
+    user.email = new_email
+    db.commit()
+    db.refresh(user)
+
+    return {
+        "ok": True,
+        "id": user.id,
+        "email": user.email,
+        "role": user.role
+    }
