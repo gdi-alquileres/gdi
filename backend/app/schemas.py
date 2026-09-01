@@ -60,3 +60,6 @@ class GuarantorIn(BaseModel):
     dni: str = ""
     cuil: str = ""
     guarantee_type: str = ""
+
+class EmailUpdateIn(BaseModel):
+    email: EmailStr
