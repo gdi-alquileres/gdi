@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gdi
+      POSTGRES_USER: gdi
+      POSTGRES_PASSWORD: cambia-esta-clave
+    volumes:
+      - gdi_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gdi -d gdi"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_NAME: GDI Alquileres
+      SECRET_KEY: cambia-por-un-secreto-largo
+      ACCESS_TOKEN_MINUTES: 10080
+      DATABASE_URL: postgresql+psycopg://gdi:cambia-esta-clave@db:5432/gdi
+      MP_ACCESS_TOKEN: ${MP_ACCESS_TOKEN:-}
+      MP_WEBHOOK_SECRET: ${MP_WEBHOOK_SECRET:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+    ports:
+      - "8000:8000"
+
+volumes:
+  gdi_pgdata:
