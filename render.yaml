@@ -2,7 +2,7 @@ databases:
   - name: gdi-alquileres-db
     databaseName: gdi
     user: gdi
-    plan: basic-256mb
+    plan: free
 
 services:
   - type: web
