@@ -1,0 +1,49 @@
+{
+  "auth": [
+    "POST /auth/register",
+    "POST /auth/login",
+    "POST /auth/recover"
+  ],
+  "properties": [
+    "GET /properties",
+    "POST /properties",
+    "GET /properties/:id",
+    "PATCH /properties/:id"
+  ],
+  "tenants": [
+    "POST /tenants",
+    "GET /tenants/:id"
+  ],
+  "guarantors": [
+    "POST /leases/:leaseId/guarantors",
+    "PATCH /guarantors/:id/review"
+  ],
+  "leases": [
+    "POST /leases",
+    "GET /leases/:id",
+    "POST /leases/:id/generate-contract"
+  ],
+  "documents": [
+    "POST /documents/upload",
+    "GET /entities/:type/:id/documents"
+  ],
+  "charges": [
+    "POST /leases/:leaseId/charges",
+    "GET /leases/:leaseId/account-statement"
+  ],
+  "payments": [
+    "POST /payments/manual",
+    "POST /payments/mercadopago/create",
+    "POST /webhooks/mercadopago"
+  ],
+  "receipts": [
+    "GET /payments/:paymentId/receipt"
+  ],
+  "adjustments": [
+    "POST /leases/:leaseId/adjustments/calculate",
+    "POST /leases/:leaseId/adjustments/apply"
+  ],
+  "calculator": [
+    "POST /calculator/rent-adjustment"
+  ]
+}

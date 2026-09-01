@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "GDI Alquileres",
+    "slug": "gdi-alquileres",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/gdi_logo.jpg",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/gdi_logo.jpg",
+      "resizeMode": "contain",
+      "backgroundColor": "#66776D"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gdi.alquileres"
+    },
+    "android": {
+      "package": "com.gdi.alquileres",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/gdi_logo.jpg"
+    },
+    "scheme": "gdialquileres"
+  }
+}
