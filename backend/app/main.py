@@ -10,7 +10,8 @@ import uuid
 
 from .db import Base, engine, get_db
 from .models import User, Property, Tenant, Lease, Charge, Payment, Receipt, Guarantor
-from .schemas import RegisterIn, LoginIn, PropertyIn, TenantIn, LeaseIn, ChargeIn, ManualPaymentIn, MercadoPagoOrderIn, GuarantorIn, EmailUpdateIn
+from .schemas import RegisterIn, LoginIn, PropertyIn, TenantIn, LeaseIn, ChargeIn, ManualPaymentIn, MercadoPagoOrderIn, GuarantorIn, EmailUpdateIn 
+
 from .auth import hash_password, verify_password, make_token, current_user, require_admin
 from .config import settings
 
