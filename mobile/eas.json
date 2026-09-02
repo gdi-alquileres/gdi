@@ -10,13 +10,13 @@
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://TU-DOMINIO-API"
+        "EXPO_PUBLIC_API_URL": "https://gdi-alquileres-api.onrender.com"
       }
     },
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://TU-DOMINIO-API"
+        "EXPO_PUBLIC_API_URL": "https://gdi-alquileres-api.onrender.com"
       },
       "distribution": "store"
     }
